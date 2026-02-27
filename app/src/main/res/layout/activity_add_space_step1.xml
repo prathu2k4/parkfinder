@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:elevation="0dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Add Parking Space"
+            app:titleTextColor="@color/dark_grey"
+            app:navigationIcon="@android:drawable/ic_menu_revert" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="16dp"
+            android:gravity="center">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="❶ Basic Info" android:textStyle="bold" android:textColor="@color/dark_grey" />
+            <View android:layout_width="40dp" android:layout_height="2dp" android:background="#E0E0E0" android:layout_marginHorizontal="8dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="② Details" android:textColor="@color/light_grey" />
+            <View android:layout_width="40dp" android:layout_height="2dp" android:background="#E0E0E0" android:layout_marginHorizontal="8dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="③ Photos" android:textColor="@color/light_grey" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout"
+        android:layout_above="@id/bottomBar"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/rounded_bg_light"
+                android:layout_marginBottom="24dp">
+                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_dialog_map" app:tint="@color/light_grey" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tap to select location on map" android:textColor="@color/light_grey" android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Address *">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:gravity="top|start" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Pincode *">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Landmark (Optional)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLandmark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="24dp"
+        android:background="@android:color/white">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinueToStep2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Continue"
+            app:backgroundTint="#2D3748" />
+    </LinearLayout>
+</RelativeLayout>

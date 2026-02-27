@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:elevation="0dp">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Payment"
+            app:titleTextColor="@color/dark_grey"
+            app:navigationIcon="@android:drawable/ic_menu_revert" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Payment Method"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_grey"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Amount"
+            android:gravity="center"
+            android:textColor="@color/light_grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="₹492"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/teal_main"
+            android:layout_marginBottom="32dp" />
+
+        <RadioGroup
+            android:id="@+id/rgPaymentMethods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Credit / Debit Card\nVisa, Mastercard, Rupay"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_bg_light" />
+
+            <RadioButton
+                android:id="@+id/rbUpi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UPI\nGoogle Pay, PhonePe, Paytm"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_bg_light" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPay"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:text="Pay ₹492"
+        app:backgroundTint="@color/teal_main" />
+</LinearLayout>

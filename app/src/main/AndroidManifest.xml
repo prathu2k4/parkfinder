@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.parkfinder">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Park Finder"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ParkFinder">
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.WelcomeActivity" android:exported="false" />
+        <activity android:name=".activities.ModeSelectionActivity" android:exported="false" />
+        <activity android:name=".activities.AddVehicleActivity" android:exported="false" />
+        <activity android:name=".activities.EnableLocationActivity" android:exported="false" />
+
+        <activity android:name=".activities.MainActivity" android:exported="false" />
+
+        <activity android:name=".activities.ParkingDetailsActivity" android:exported="false" />
+        <activity android:name=".activities.SelectTimeSlotActivity" android:exported="false" />
+        <activity android:name=".activities.BookingSummaryActivity" android:exported="false" />
+        <activity android:name=".activities.PaymentActivity" android:exported="false" />
+        <activity android:name=".activities.PaymentSuccessActivity" android:exported="false" />
+        <activity android:name=".activities.ActiveBookingActivity" android:exported="false" />
+
+        <activity android:name=".activities.OwnerDashboardActivity" android:exported="false" />
+        <activity android:name=".activities.AddSpaceStep1Activity" android:exported="false" />
+        <activity android:name=".activities.AddSpaceStep2Activity" android:exported="false" />
+        <activity android:name=".activities.AddSpaceStep3Activity" android:exported="false" />
+        <activity android:name=".activities.ManageSpaceActivity" android:exported="false" />
+
+    </application>
+
+</manifest>
