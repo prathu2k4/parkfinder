@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -51,40 +50,48 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Date &amp; Time"
-                android:textColor="@color/teal_main"
+                android:text="Quick Select Duration"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:textColor="@color/dark_grey"
+                android:layout_marginBottom="12dp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.gridlayout.widget.GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Date"
-                app:endIconMode="custom"
-                app:endIconDrawable="@android:drawable/ic_menu_my_calendar">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etStartDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:clickable="true"/>
+                app:columnCount="3"
+                android:layout_marginBottom="24dp">
+
+                <Button android:id="@+id/btn1h" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="0dp" app:layout_columnWeight="1" android:text="1h" android:layout_margin="4dp"/>
+                <Button android:id="@+id/btn2h" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="0dp" app:layout_columnWeight="1" android:text="2h" android:layout_margin="4dp"/>
+                <Button android:id="@+id/btn3h" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="0dp" app:layout_columnWeight="1" android:text="3h" android:layout_margin="4dp"/>
+                <Button android:id="@+id/btn4h" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="0dp" app:layout_columnWeight="1" android:text="4h" android:layout_margin="4dp"/>
+                <Button android:id="@+id/btn6h" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="0dp" app:layout_columnWeight="1" android:text="6h" android:layout_margin="4dp"/>
+                <Button android:id="@+id/btn8h" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="0dp" app:layout_columnWeight="1" android:text="8h" android:layout_margin="4dp"/>
+            </androidx.gridlayout.widget.GridLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OR SELECT CUSTOM TIME"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/light_grey"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start Date &amp; Time" android:textColor="@color/teal_main" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+            <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Date" app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etStartDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:focusable="false" android:clickable="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:hint="Time" app:startIconDrawable="@android:drawable/ic_menu_recent_history">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etStartTime" android:layout_width="match_parent" android:layout_height="wrap_content" android:focusable="false" android:clickable="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Time"
-                app:endIconMode="custom"
-                app:endIconDrawable="@android:drawable/ic_menu_recent_history">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etStartTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:clickable="true"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="End Date &amp; Time" android:textColor="@color/teal_main" android:textStyle="bold" android:layout_marginTop="24dp" android:layout_marginBottom="8dp"/>
+            <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Date" app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEndDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:focusable="false" android:clickable="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:hint="Time" app:startIconDrawable="@android:drawable/ic_menu_recent_history">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEndTime" android:layout_width="match_parent" android:layout_height="wrap_content" android:focusable="false" android:clickable="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -100,28 +107,14 @@
         android:background="@android:color/white"
         android:elevation="16dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Price"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/dark_grey"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:id="@+id/tvCalculatedTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="₹158"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/teal_main"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Duration" android:textColor="@color/light_grey"/>
+            <TextView android:id="@+id/tvDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0h" android:layout_alignParentEnd="true" android:textColor="@color/dark_grey" android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Price" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/dark_grey" android:layout_centerVertical="true"/>
+            <TextView android:id="@+id/tvCalculatedTotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="₹0" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/teal_main" android:layout_alignParentEnd="true" android:layout_centerVertical="true"/>
         </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -129,7 +122,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Continue to Booking Summary"
-            app:backgroundTint="@color/teal_main" />
+            app:backgroundTint="@color/teal_main"
+            android:enabled="false"/>
     </LinearLayout>
 
 </RelativeLayout>

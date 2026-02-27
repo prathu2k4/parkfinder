@@ -18,84 +18,104 @@ import java.util.Locale;
 public class SelectTimeSlotActivity extends AppCompatActivity {
 
     private TextInputEditText etStartDate, etStartTime, etEndDate, etEndTime;
-    private TextView tvCalculatedTotal;
+    private TextView tvCalculatedTotal, tvDuration;
     private Button btnContinueToSummary;
+    private final double HOURLY_RATE = 30.0;
 
     private Calendar startCal = Calendar.getInstance();
     private Calendar endCal = Calendar.getInstance();
-    private final double HOURLY_RATE = 30.0;
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    private final SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_time_slot);
 
+        setupUI();
+        setupQuickSelect();
+        setupPickers();
+    }
+
+    private void setupUI() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         etStartDate = findViewById(R.id.etStartDate);
         etStartTime = findViewById(R.id.etStartTime);
-        // Assuming you duplicated the XML ids for end date/time as suggested earlier
         etEndDate = findViewById(R.id.etEndDate);
         etEndTime = findViewById(R.id.etEndTime);
         tvCalculatedTotal = findViewById(R.id.tvCalculatedTotal);
+        tvDuration = findViewById(R.id.tvDuration);
         btnContinueToSummary = findViewById(R.id.btnContinueToSummary);
 
-        // Disable button initially
-        btnContinueToSummary.setEnabled(false);
+        btnContinueToSummary.setOnClickListener(v -> {
+            startActivity(new Intent(this, BookingSummaryActivity.class));
+        });
+    }
 
-        // Setup Click Listeners for Pickers
+    private void setupQuickSelect() {
+        // Mocking quick select: Sets start time as NOW and adds X hours
+        int[] ids = {R.id.btn1h, R.id.btn2h, R.id.btn3h, R.id.btn4h, R.id.btn6h, R.id.btn8h};
+        int[] hoursToAdd = {1, 2, 3, 4, 6, 8};
+
+        for (int i = 0; i < ids.length; i++) {
+            final int h = hoursToAdd[i];
+            findViewById(ids[i]).setOnClickListener(v -> {
+                startCal = Calendar.getInstance();
+                endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.HOUR_OF_DAY, h);
+
+                updateDateTimeStrings();
+                calculateFinal();
+            });
+        }
+    }
+
+    private void setupPickers() {
         etStartDate.setOnClickListener(v -> showDatePicker(startCal, etStartDate));
         etStartTime.setOnClickListener(v -> showTimePicker(startCal, etStartTime));
         etEndDate.setOnClickListener(v -> showDatePicker(endCal, etEndDate));
         etEndTime.setOnClickListener(v -> showTimePicker(endCal, etEndTime));
-
-        btnContinueToSummary.setOnClickListener(v -> {
-            Intent intent = new Intent(SelectTimeSlotActivity.this, BookingSummaryActivity.class);
-            startActivity(intent);
-        });
     }
 
-    private void showDatePicker(Calendar calendar, TextInputEditText editText) {
-        new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, month);
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-            editText.setText(sdf.format(calendar.getTime()));
-            calculatePrice();
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+    private void showDatePicker(Calendar cal, TextInputEditText et) {
+        new DatePickerDialog(this, (v, y, m, d) -> {
+            cal.set(y, m, d);
+            et.setText(dateFormat.format(cal.getTime()));
+            calculateFinal();
+        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void showTimePicker(Calendar calendar, TextInputEditText editText) {
-        new TimePickerDialog(this, (view, hourOfDay, minute) -> {
-            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            calendar.set(Calendar.MINUTE, minute);
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-            editText.setText(sdf.format(calendar.getTime()));
-            calculatePrice();
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+    private void showTimePicker(Calendar cal, TextInputEditText et) {
+        new TimePickerDialog(this, (v, h, m) -> {
+            cal.set(Calendar.HOUR_OF_DAY, h);
+            cal.set(Calendar.MINUTE, m);
+            et.setText(timeFormat.format(cal.getTime()));
+            calculateFinal();
+        }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show();
     }
 
-    private void calculatePrice() {
-        // Ensure all fields are filled before calculating
-        if (etStartDate.getText().toString().isEmpty() || etStartTime.getText().toString().isEmpty() ||
-                etEndDate.getText().toString().isEmpty() || etEndTime.getText().toString().isEmpty()) {
-            return;
-        }
+    private void updateDateTimeStrings() {
+        etStartDate.setText(dateFormat.format(startCal.getTime()));
+        etStartTime.setText(timeFormat.format(startCal.getTime()));
+        etEndDate.setText(dateFormat.format(endCal.getTime()));
+        etEndTime.setText(timeFormat.format(endCal.getTime()));
+    }
 
-        long diffInMillis = endCal.getTimeInMillis() - startCal.getTimeInMillis();
+    private void calculateFinal() {
+        if (etStartDate.getText().toString().isEmpty() || etEndTime.getText().toString().isEmpty()) return;
 
-        if (diffInMillis <= 0) {
-            Toast.makeText(this, "End time must be after start time", Toast.LENGTH_SHORT).show();
-            btnContinueToSummary.setEnabled(false);
+        long diff = endCal.getTimeInMillis() - startCal.getTimeInMillis();
+        if (diff <= 0) {
+            tvDuration.setText("Invalid Range");
             tvCalculatedTotal.setText("₹0");
+            btnContinueToSummary.setEnabled(false);
         } else {
-            // Convert milliseconds to hours
-            double hours = diffInMillis / (1000.0 * 60 * 60);
-            int totalCost = (int) Math.ceil(hours * HOURLY_RATE);
-
-            tvCalculatedTotal.setText("₹" + totalCost);
+            double hours = diff / (1000.0 * 60 * 60);
+            int total = (int) Math.ceil(hours * HOURLY_RATE);
+            tvDuration.setText(String.format(Locale.getDefault(), "%.1f hours", hours));
+            tvCalculatedTotal.setText("₹" + total);
             btnContinueToSummary.setEnabled(true);
         }
     }
