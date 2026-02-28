@@ -31,12 +31,29 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvSummarySpotName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spot Name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_grey"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvSummaryDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:textColor="@color/light_grey"
+                android:layout_marginBottom="24dp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price Breakdown"
                 android:textStyle="bold"
                 android:textColor="@color/dark_grey"
-                android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp" />
 
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
@@ -53,7 +70,15 @@
 
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Amount" android:textStyle="bold" android:textSize="18sp" android:textColor="@color/dark_grey" />
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="₹492" android:textStyle="bold" android:textSize="24sp" android:textColor="@color/teal_main" android:layout_alignParentEnd="true" />
+                <TextView
+                    android:id="@+id/tvTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹492"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/teal_main"
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -68,7 +93,7 @@
             android:id="@+id/btnProceedPayment"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Proceed to Payment ♦ ₹492"
+            android:text="Proceed to Payment"
             app:backgroundTint="@color/teal_main" />
     </LinearLayout>
 </LinearLayout>

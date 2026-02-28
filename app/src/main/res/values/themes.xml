@@ -10,7 +10,8 @@
         <item name="colorOnSecondary">@color/white</item>
 
         <item name="android:statusBarColor">@color/teal_main</item>
-
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
         <item name="colorError">@color/color_error</item>
         <item name="colorOnError">@color/white</item>
 

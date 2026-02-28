@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.parkfinder.R;
 import com.google.android.material.textfield.TextInputEditText;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -24,8 +26,10 @@ public class SelectTimeSlotActivity extends AppCompatActivity {
 
     private Calendar startCal = Calendar.getInstance();
     private Calendar endCal = Calendar.getInstance();
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-    private final SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+    private final SimpleDateFormat dateFormat =
+            new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    private final SimpleDateFormat timeFormat =
+            new SimpleDateFormat("hh:mm a", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,25 +53,56 @@ public class SelectTimeSlotActivity extends AppCompatActivity {
         tvDuration = findViewById(R.id.tvDuration);
         btnContinueToSummary = findViewById(R.id.btnContinueToSummary);
 
+        btnContinueToSummary.setEnabled(false);
+
+        // ✅ UPDATED Continue Button
         btnContinueToSummary.setOnClickListener(v -> {
-            startActivity(new Intent(this, BookingSummaryActivity.class));
+
+            Intent intent = new Intent(
+                    SelectTimeSlotActivity.this,
+                    BookingSummaryActivity.class
+            );
+
+            // Pass original spot name from previous screen
+            intent.putExtra("SPOT_NAME",
+                    getIntent().getStringExtra("SPOT_NAME"));
+
+            intent.putExtra("DURATION",
+                    tvDuration.getText().toString());
+
+            intent.putExtra("TOTAL_COST",
+                    tvCalculatedTotal.getText().toString());
+
+            startActivity(intent);
         });
     }
 
     private void setupQuickSelect() {
-        // Mocking quick select: Sets start time as NOW and adds X hours
-        int[] ids = {R.id.btn1h, R.id.btn2h, R.id.btn3h, R.id.btn4h, R.id.btn6h, R.id.btn8h};
+
+        int[] ids = {R.id.btn1h, R.id.btn2h, R.id.btn3h,
+                R.id.btn4h, R.id.btn6h, R.id.btn8h};
+
         int[] hoursToAdd = {1, 2, 3, 4, 6, 8};
 
         for (int i = 0; i < ids.length; i++) {
-            final int h = hoursToAdd[i];
-            findViewById(ids[i]).setOnClickListener(v -> {
-                startCal = Calendar.getInstance();
-                endCal = (Calendar) startCal.clone();
-                endCal.add(Calendar.HOUR_OF_DAY, h);
 
-                updateDateTimeStrings();
-                calculateFinal();
+            final int durationInHours = hoursToAdd[i];
+
+            findViewById(ids[i]).setOnClickListener(v -> {
+
+                String priceStr =
+                        getIntent().getStringExtra("SPOT_PRICE");
+
+                if (priceStr == null) return;
+
+                int hourlyRate = Integer.parseInt(priceStr);
+
+                int totalCost = durationInHours * hourlyRate;
+
+                tvDuration.setText(durationInHours + " hours");
+                tvCalculatedTotal.setText("₹" + totalCost);
+
+                btnContinueToSummary.setEnabled(true);
             });
         }
     }
@@ -84,7 +119,9 @@ public class SelectTimeSlotActivity extends AppCompatActivity {
             cal.set(y, m, d);
             et.setText(dateFormat.format(cal.getTime()));
             calculateFinal();
-        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+        }, cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void showTimePicker(Calendar cal, TextInputEditText et) {
@@ -93,20 +130,18 @@ public class SelectTimeSlotActivity extends AppCompatActivity {
             cal.set(Calendar.MINUTE, m);
             et.setText(timeFormat.format(cal.getTime()));
             calculateFinal();
-        }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show();
-    }
-
-    private void updateDateTimeStrings() {
-        etStartDate.setText(dateFormat.format(startCal.getTime()));
-        etStartTime.setText(timeFormat.format(startCal.getTime()));
-        etEndDate.setText(dateFormat.format(endCal.getTime()));
-        etEndTime.setText(timeFormat.format(endCal.getTime()));
+        }, cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                false).show();
     }
 
     private void calculateFinal() {
-        if (etStartDate.getText().toString().isEmpty() || etEndTime.getText().toString().isEmpty()) return;
+        if (etStartDate.getText().toString().isEmpty()
+                || etEndTime.getText().toString().isEmpty()) return;
 
-        long diff = endCal.getTimeInMillis() - startCal.getTimeInMillis();
+        long diff = endCal.getTimeInMillis()
+                - startCal.getTimeInMillis();
+
         if (diff <= 0) {
             tvDuration.setText("Invalid Range");
             tvCalculatedTotal.setText("₹0");
@@ -114,7 +149,11 @@ public class SelectTimeSlotActivity extends AppCompatActivity {
         } else {
             double hours = diff / (1000.0 * 60 * 60);
             int total = (int) Math.ceil(hours * HOURLY_RATE);
-            tvDuration.setText(String.format(Locale.getDefault(), "%.1f hours", hours));
+
+            tvDuration.setText(
+                    String.format(Locale.getDefault(),
+                            "%.1f hours", hours));
+
             tvCalculatedTotal.setText("₹" + total);
             btnContinueToSummary.setEnabled(true);
         }

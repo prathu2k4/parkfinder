@@ -1,16 +1,16 @@
 package com.example.parkfinder.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.parkfinder.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class AddVehicleActivity extends AppCompatActivity {
 
@@ -19,43 +19,52 @@ public class AddVehicleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vehicle);
 
-        // 1. Setup Dropdown
+        // 1. Setup Toolbar Back Button
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        // 2. Setup Vehicle Type Dropdown
         String[] vehicleTypes = new String[]{"Car", "Bike"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, vehicleTypes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                vehicleTypes
+        );
+
         AutoCompleteTextView spinnerVehicleType = findViewById(R.id.spinnerVehicleType);
         spinnerVehicleType.setAdapter(adapter);
+        spinnerVehicleType.setText(vehicleTypes[0], false); // Default to "Car"
 
-        // 2. Setup Custom Toggle Logic
-        RadioGroup rgVehicleCategory = findViewById(R.id.rgVehicleCategory);
-        RadioButton rbCar = findViewById(R.id.rbCar);
-        RadioButton rbBike = findViewById(R.id.rbBike);
-
-        rgVehicleCategory.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.rbCar) {
-                // Active State for Car
-                rbCar.setBackgroundColor(ContextCompat.getColor(this, R.color.teal_main));
-                rbCar.setTextColor(Color.WHITE);
-                // Inactive State for Bike
-                rbBike.setBackgroundColor(Color.TRANSPARENT);
-                rbBike.setTextColor(ContextCompat.getColor(this, R.color.dark_grey));
-            } else if (checkedId == R.id.rbBike) {
-                // Active State for Bike
-                rbBike.setBackgroundColor(ContextCompat.getColor(this, R.color.teal_main));
-                rbBike.setTextColor(Color.WHITE);
-                // Inactive State for Car
-                rbCar.setBackgroundColor(Color.TRANSPARENT);
-                rbCar.setTextColor(ContextCompat.getColor(this, R.color.dark_grey));
-            }
-        });
-
-        // Trigger default state
-        rbCar.setChecked(true);
-
-        // 3. Setup Navigation
+        // 3. Setup Validation & Save Logic
+        TextInputEditText etVehicleNumber = findViewById(R.id.etVehicleNumber);
         Button btnSaveVehicle = findViewById(R.id.btnSaveVehicle);
+
         btnSaveVehicle.setOnClickListener(v -> {
-            Intent intent = new Intent(AddVehicleActivity.this, EnableLocationActivity.class);
-            startActivity(intent);
+
+            String vehicleNo = etVehicleNumber.getText() != null
+                    ? etVehicleNumber.getText().toString().trim().toUpperCase()
+                    : "";
+
+            // Regex: Exactly 10 alphanumeric characters
+            if (vehicleNo.matches("^[A-Z0-9]{10}$")) {
+
+                // ✅ Save state in SharedPreferences
+                getSharedPreferences("ParkFinderPrefs", MODE_PRIVATE)
+                        .edit()
+                        .putBoolean("isVehicleAdded", true)
+                        .apply();
+
+                Intent intent = new Intent(
+                        AddVehicleActivity.this,
+                        EnableLocationActivity.class
+                );
+                startActivity(intent);
+
+                finish(); // Prevent returning to this screen
+
+            } else {
+                etVehicleNumber.setError("Must be exactly 10 alphanumeric characters");
+            }
         });
     }
 }

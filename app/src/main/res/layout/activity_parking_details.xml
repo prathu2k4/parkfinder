@@ -64,7 +64,7 @@
                 android:layout_marginTop="16dp" />
 
             <TextView
-                android:id="@+id/tvDistance"
+                android:id="@+id/tvDetailsDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="📍 3.2 km away"
@@ -130,6 +130,7 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="24dp">
                 <TextView
+                    android:id="@+id/tvDetailsPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="₹100"

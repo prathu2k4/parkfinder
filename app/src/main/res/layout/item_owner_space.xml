@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp">
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/tvOwnerSpaceName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="My Parking Lot A" android:textStyle="bold" android:textSize="16sp" android:textColor="@color/dark_grey"/>
+                <TextView android:id="@+id/tvOwnerSpaceAddress" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="123 Main Street" android:textColor="@color/light_grey" android:textSize="12sp"/>
+            </LinearLayout>
+            <ImageButton android:id="@+id/btnSpaceSettings" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@android:drawable/ic_menu_manage" android:background="?attr/selectableItemBackgroundBorderless" android:layout_alignParentEnd="true" app:tint="@color/dark_grey"/>
+        </RelativeLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Active" android:textColor="@color/light_grey" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvOwnerSpaceActive" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4" android:textStyle="bold" android:textColor="@color/dark_grey"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Slots" android:textColor="@color/light_grey" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvOwnerSpaceSlots" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="20" android:textStyle="bold" android:textColor="@color/dark_grey"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Revenue" android:textColor="@color/light_grey" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvOwnerSpaceRevenue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="₹2.1k" android:textStyle="bold" android:textColor="@color/teal_main"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

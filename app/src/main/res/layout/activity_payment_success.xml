@@ -67,6 +67,14 @@
             app:backgroundTint="@color/teal_main"
             android:layout_marginBottom="8dp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Done"
+            app:backgroundTint="@color/green_main"
+            android:layout_marginBottom="8dp" />
+
         <Button
             android:id="@+id/btnBackHome"
             style="?attr/borderlessButtonStyle"

@@ -16,16 +16,24 @@ public class ModeSelectionActivity extends AppCompatActivity {
         CardView cardRider = findViewById(R.id.cardRider);
         CardView cardOwner = findViewById(R.id.cardOwner);
 
+        // Rider Click - Fade Transition
         cardRider.setOnClickListener(v -> {
-            // Rider onboarding continues with adding a vehicle
             Intent intent = new Intent(ModeSelectionActivity.this, AddVehicleActivity.class);
             startActivity(intent);
+            overridePendingTransition(
+                    android.R.anim.fade_in,
+                    android.R.anim.fade_out
+            );
         });
 
+        // Owner Click - Slide Transition
         cardOwner.setOnClickListener(v -> {
-            // Owner skips onboarding and goes straight to their dashboard
             Intent intent = new Intent(ModeSelectionActivity.this, OwnerDashboardActivity.class);
             startActivity(intent);
+            overridePendingTransition(
+                    android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right
+            );
         });
     }
 }

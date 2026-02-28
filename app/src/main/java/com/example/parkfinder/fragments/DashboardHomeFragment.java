@@ -26,7 +26,15 @@ public class DashboardHomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        // Setup for rvOwnerSpaces and rvRecentBookings RecyclerViews goes here
+// Injecting Dummy Data into Owner Dashboard
+        androidx.recyclerview.widget.RecyclerView rvOwnerSpaces = view.findViewById(R.id.rvOwnerSpaces);
+        rvOwnerSpaces.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(getContext()));
+
+        java.util.List<com.example.parkfinder.OwnerSpace> dummySpaces = new java.util.ArrayList<>();
+        dummySpaces.add(new com.example.parkfinder.OwnerSpace("My Parking Lot A", "123 Main Street", "4", "20", "2.1k"));
+        dummySpaces.add(new com.example.parkfinder.OwnerSpace("Office Building B", "456 Tech Park", "8", "50", "5.4k"));
+
+        rvOwnerSpaces.setAdapter(new com.example.parkfinder.OwnerSpaceAdapter(dummySpaces));
 
         return view;
     }

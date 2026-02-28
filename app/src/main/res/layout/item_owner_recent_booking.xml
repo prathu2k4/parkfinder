@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="12dp"
+    android:gravity="center_vertical"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView android:id="@+id/tvRecentVehicle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚗 ABC1234" android:textStyle="bold" android:textColor="@color/dark_grey"/>
+        <TextView android:id="@+id/tvRecentLocation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="My Parking Lot A" android:textSize="12sp" android:textColor="@color/light_grey"/>
+        <TextView android:id="@+id/tvRecentDateTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Today, 2:00 PM" android:textSize="12sp" android:textColor="@color/light_grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+        <TextView android:id="@+id/tvRecentPrice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+ ₹150" android:textStyle="bold" android:textColor="@color/dark_grey"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirmed" android:textSize="12sp" android:textColor="@color/green_main"/>
+    </LinearLayout>
+
+</LinearLayout>

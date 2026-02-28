@@ -1,109 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="24dp"
+        android:background="@color/teal_main">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@color/dark_grey"
-            android:layout_marginBottom="24dp" />
+        <ImageView
+            android:id="@+id/ivProfilePic"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@android:drawable/sym_def_app_icon"
+            android:background="@drawable/circle_teal_bg" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="32dp">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/circle_teal_bg"
-                android:src="@android:drawable/ic_menu_myplaces"
-                app:tint="@android:color/white"
-                android:padding="16dp" />
+            android:layout_toEndOf="@id/ivProfilePic"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="John Doe"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/dark_grey"
-                android:layout_marginTop="12dp" />
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Member since January 2024"
+                android:text="+91 9876543210"
+                android:textColor="@android:color/white"
+                android:alpha="0.8" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account Settings"
                 android:textColor="@color/light_grey"
-                android:layout_marginBottom="16dp" />
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✉ john.doe@example.com" android:textColor="@color/dark_grey" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📞 +91 98765 43210" android:textColor="@color/dark_grey" android:layout_marginTop="4dp" />
+            <TextView
+                android:id="@+id/menuMyVehicles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Vehicles"
+                android:padding="16dp"
+                android:textColor="@color/dark_grey"
+                android:background="?attr/selectableItemBackground"
+                app:drawableStartCompat="@android:drawable/ic_menu_directions"
+                android:drawablePadding="16dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditProfile"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            <TextView
+                android:id="@+id/menuPaymentMethods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Methods"
+                android:padding="16dp"
+                android:textColor="@color/dark_grey"
+                android:background="?attr/selectableItemBackground"
+                app:drawableStartCompat="@android:drawable/ic_menu_agenda"
+                android:drawablePadding="16dp" />
+
+            <TextView
+                android:id="@+id/menuEditProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
+                android:padding="16dp"
                 android:textColor="@color/dark_grey"
-                app:strokeColor="@color/light_grey"
-                android:layout_marginTop="24dp" />
-        </LinearLayout>
+                android:background="?attr/selectableItemBackground"
+                app:drawableStartCompat="@android:drawable/ic_menu_edit"
+                android:drawablePadding="16dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginVertical="16dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Vehicles"
-                android:textSize="18sp"
+                android:text="More Options"
+                android:textColor="@color/light_grey"
                 android:textStyle="bold"
-                android:textColor="@color/dark_grey" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"/>
+
             <TextView
-                android:id="@+id/btnAddVehicleText"
-                android:layout_width="wrap_content"
+                android:id="@+id/menuHelpSupport"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+ Add Vehicle"
+                android:text="Help &amp; Support"
+                android:padding="16dp"
+                android:textColor="@color/dark_grey"
+                android:background="?attr/selectableItemBackground"
+                app:drawableStartCompat="@android:drawable/ic_menu_help"
+                android:drawablePadding="16dp" />
+
+            <TextView
+                android:id="@+id/menuSwitchMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Switch to Owner Mode"
+                android:padding="16dp"
                 android:textColor="@color/teal_main"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
+                android:textStyle="bold"
+                android:background="?attr/selectableItemBackground"
+                app:drawableStartCompat="@android:drawable/ic_menu_revert"
+                android:drawablePadding="16dp" />
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="🚗 ABC1234 (Car)" android:paddingVertical="12dp" android:textColor="@color/dark_grey" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Log Out"
+                android:textColor="@color/color_error"
+                app:strokeColor="@color/color_error"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp" />
 
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0" android:layout_marginVertical="16dp"/>
-
-        <TextView android:id="@+id/menuBookings" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="My Bookings  →" android:paddingVertical="12dp" android:textColor="@color/dark_grey" />
-        <TextView android:id="@+id/menuSupport" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Help &amp; Support  →" android:paddingVertical="12dp" android:textColor="@color/dark_grey" />
-        <TextView android:id="@+id/menuSwitchMode" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Switch Mode  →" android:paddingVertical="12dp" android:textColor="@color/dark_grey" android:textStyle="bold" />
-
-        <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="48dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogout"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Logout"
-            android:textColor="#E53E3E"
-            app:strokeColor="#E53E3E" />
-
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
